@@ -7,10 +7,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Entity
-@Table(name="entity1")
+@Table(name = "entity1")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,7 +25,7 @@ public class Entity1 {
     @Column(name = "entity1_id")
     private Long id;
 
-    @Column(name="entity1_name")
+    @Column(name = "entity1_name")
     private String name;
 
     @ElementCollection
@@ -31,6 +33,13 @@ public class Entity1 {
     @MapKeyColumn(name = "map1_key")
     @Column(name = "map1_value")
     private Map<String, Float> map1 = new HashMap<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "map2",
+            joinColumns = @JoinColumn(name = "entity1_id"),
+            inverseJoinColumns = @JoinColumn(name = "entity2_id"))
+    private Set<Entity2> entity2s = new HashSet<>();
 
     public Entity1(String name) {
         this.name = name;
