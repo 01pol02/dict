@@ -1,0 +1,19 @@
+version: '3'
+services:
+  postgres:
+    hostname: postgreshost
+    image: postgres:10.6-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass
+    ports:
+      - 5432:5432
+#  pgadmin:
+#    image: dpage/pgadmin4:4.3
+#    ports:
+#      - 5050:80
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: postgres@localhost
+#      PGADMIN_DEFAULT_PASSWORD: pgpass
